@@ -1,6 +1,13 @@
 from stats import count_words, count_characters, sort_output
+import sys
 
-bookfile = 'books/frankenstein.txt'
+def check_args(args):
+    if len(args) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    else:
+        bookfile = args[1]
+    return bookfile
 
 def get_book_text(file_path):
     with open(file_path) as f:
@@ -8,6 +15,7 @@ def get_book_text(file_path):
     return file_contents
 
 def main():
+    bookfile = check_args(sys.argv)
     file_contents = get_book_text(bookfile)
     num_words = count_words(file_contents)
     counted_characters_sorted = sort_output(count_characters(file_contents))
